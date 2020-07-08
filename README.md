@@ -1,6 +1,6 @@
 # Betting
 
-[![GoDoc](https://godoc.org/github.com/Nyarum/betting?status.svg)](https://godoc.org/github.com/Nyarum/betting)
+[![GoDoc](https://godoc.org/github.com/ollie-cox/betting?status.svg)](https://godoc.org/github.com/ollie-cox/betting)
 
 ### It is API wrapper which have
 - Speed
