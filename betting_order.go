@@ -13,12 +13,37 @@ type PlaceInstruction struct {
 	CustomerOrderRef   string             `json:"customerOrderRef,omitempty"`
 }
 
+
 type PlaceExecutionReport struct {
 	CustomerRef        string                    `json:"customerRef,omitempty"`
 	Status             EExecutionReportStatus    `json:"status,omitempty"`
 	ErrorCode          EExecutionReportErrorCode `json:"errorCode,omitempty"`
 	MarketID           string                    `json:"marketId,omitempty"`
 	InstructionReports []PlaceInstructionReport  `json:"instructionReports,omitempty"`
+}
+
+
+type CancelInstruction struct {
+	BetID               string                      `json:"betId,omitempty"`
+	SizeReduction		float64						`json:"sizeReduction"`
+}
+
+
+type CancelExecutionReport struct {
+	CustomerRef        string                    `json:"customerRef,omitempty"`
+	Status             EExecutionReportStatus    `json:"status,omitempty"`
+	ErrorCode          EExecutionReportErrorCode `json:"errorCode,omitempty"`
+	MarketID           string                    `json:"marketId,omitempty"`
+	InstructionReports []CancelInstructionReport `json:"instructionReports,omitempty"`
+}
+
+
+type CancelInstructionReport struct {
+	Status             EInstructionReportStatus    	`json:"status,omitempty"`
+	ErrorCode          EInstructionReportErrorCode 	`json:"errorCode,omitempty"`
+	Instruction        CancelInstruction 			`json:"instruction,omitempty"`
+	SizeCancelled 	   float64 						`json:"sizeCancelled,omitempty"`
+	CancelledDate 	   time.Time                   	`json:"cancelledDate,omitempty"`
 }
 
 type PlaceInstructionReport struct {
@@ -54,6 +79,17 @@ type MarketOnCloseOrder struct {
 // PlaceOrders to place new orders into market.
 func (b *Betting) PlaceOrders(filter Filter) (placeExecutionReport PlaceExecutionReport, err error) {
 	err = b.Request(&placeExecutionReport, BettingURL, "placeOrders", &filter)
+	if err != nil {
+		return
+	}
+
+	return
+}
+
+
+// PlaceOrders to place new orders into market.
+func (b *Betting) CancelOrders(filter Filter) (cancelExecutionReport CancelInstructionReport, err error) {
+	err = b.Request(&cancelExecutionReport, BettingURL, "cancelOrders", &filter)
 	if err != nil {
 		return
 	}
