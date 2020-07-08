@@ -28,7 +28,6 @@ type CancelInstruction struct {
 	SizeReduction		float64						`json:"sizeReduction"`
 }
 
-
 type CancelExecutionReport struct {
 	CustomerRef        string                    `json:"customerRef,omitempty"`
 	Status             EExecutionReportStatus    `json:"status,omitempty"`
@@ -88,7 +87,7 @@ func (b *Betting) PlaceOrders(filter Filter) (placeExecutionReport PlaceExecutio
 
 
 // PlaceOrders to place new orders into market.
-func (b *Betting) CancelOrders(filter Filter) (cancelExecutionReport CancelInstructionReport, err error) {
+func (b *Betting) CancelOrders(filter Filter) (cancelExecutionReport CancelExecutionReport, err error) {
 	err = b.Request(&cancelExecutionReport, BettingURL, "cancelOrders", &filter)
 	if err != nil {
 		return
