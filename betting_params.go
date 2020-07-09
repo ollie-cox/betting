@@ -60,11 +60,14 @@ type Filter struct {
 	MaxResults                   int                  `json:"maxResults,omitempty"`
 	IncludeSettledBets           bool                 `json:"includeSettledBets,omitempty"`
 	TimeGranularity              ETimeGranularity     `json:"granularity,omitempty"`
-	PlaceOrdersMarketID  string               `json:"marketId,omitempty"`
+	PlaceOrdersMarketID 		 string               `json:"marketId,omitempty"`
 	PlaceOrdersInstructions      []PlaceInstruction   `json:"instructions,omitempty"`
 	CustomerOrderRefs            []string             `json:"customerOrderRefs,omitempty"`
 	CustomerStrategyRefs         []string             `json:"customerStrategyRefs,omitempty"`
+
+}
+
+type CancelFilter struct {
+	MarketID 		 string               `json:"marketId,omitempty"`
 	CancelOrdersInstructions 	 []CancelInstruction  `json:"instructions,omitempty"`
-
-
 }
