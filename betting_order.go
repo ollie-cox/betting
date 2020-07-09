@@ -8,8 +8,8 @@ type PlaceInstruction struct {
 	Handicap           float64            `json:"handicap"`
 	Side               ESide              `json:"side,omitempty"`
 	LimitOrder         LimitOrder         `json:"limitOrder,omitempty"`
-	LimitOnCloseOrder  LimitOnCloseOrder  `json:"limitOnCloseOrder,omitempty"`
-	MarketOnCloseOrder MarketOnCloseOrder `json:"marketOnCloseOrder,omitempty"`
+	//LimitOnCloseOrder  LimitOnCloseOrder  `json:"limitOnCloseOrder,omitempty"`
+	//MarketOnCloseOrder MarketOnCloseOrder `json:"marketOnCloseOrder,omitempty"`
 	CustomerOrderRef   string             `json:"customerOrderRef,omitempty"`
 }
 
@@ -25,7 +25,7 @@ type PlaceExecutionReport struct {
 
 type CancelInstruction struct {
 	BetID               string                      `json:"betId,omitempty"`
-	SizeReduction		float64						`json:"sizeReduction"`
+//	SizeReduction		float64						`json:"sizeReduction"`
 }
 
 type CancelExecutionReport struct {
@@ -87,8 +87,8 @@ func (b *Betting) PlaceOrders(filter Filter) (placeExecutionReport PlaceExecutio
 
 
 // PlaceOrders to place new orders into market.
-func (b *Betting) CancelOrders(filter Filter) (cancelExecutionReport CancelExecutionReport, err error) {
-	err = b.Request(&cancelExecutionReport, BettingURL, "cancelOrders", &filter)
+func (b *Betting) CancelOrders(filter CancelFilter) (cancelExecutionReport CancelExecutionReport, err error) {
+	err = b.CancelRequest(&cancelExecutionReport, BettingURL, "cancelOrders", &filter)
 	if err != nil {
 		return
 	}
