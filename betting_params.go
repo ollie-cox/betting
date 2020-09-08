@@ -75,5 +75,5 @@ type CancelFilter struct {
 
 type RunnerFilter struct {
 	MarketID 		 string               `json:"marketId,omitempty"`
-	SelectionId         RunnerID           `json:"selectionId,omitempty"`
+	SelectionID         RunnerID           `json:"selectionId,omitempty"`
 }
