@@ -8,9 +8,9 @@ type DateRange struct {
 }
 
 type RunnerID struct {
-	MarketID    string
-	SelectionID int64
-	Handicap    float64
+	MarketID    string `json:"marketId,omitempty"`
+	SelectionID int64 `json:"selectionId,omitempty"`
+	// Handicap    float64 `json:"handicap,omitempty"`
 }
 
 type EXBestOffersOverrides struct {
@@ -70,4 +70,10 @@ type Filter struct {
 type CancelFilter struct {
 	MarketID 		 string               `json:"marketId,omitempty"`
 	CancelOrdersInstructions 	 []CancelInstruction  `json:"instructions,omitempty"`
+}
+
+
+type RunnerFilter struct {
+	MarketID 		 string               `json:"marketId,omitempty"`
+	RunnerID         RunnerID           `json:"runnerId,omitempty"`
 }
