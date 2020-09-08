@@ -286,6 +286,14 @@ func (b *Betting) ListMarketBook(filter Filter) (marketBook []MarketBook, err er
 	return
 }
 
+
+// ListMarketBook to get a list of dynamic data about markets.
+func (b *Betting) ListRunnerBook(filter RunnerFilter) (marketBook []MarketBook, err error) {
+	err = b.RunnerRequest(&marketBook, BettingURL, "listRunnerBook", &filter)
+
+	return
+}
+
 type MarketProfitAndLoss struct {
 	MarketId          string                `json:"marketId,omitempty"`
 	CommissionApplied float64               `json:"commissionApplied,omitempty"`
