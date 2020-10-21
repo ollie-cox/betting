@@ -73,6 +73,11 @@ type CancelFilter struct {
 }
 
 
+type ReplaceFilter struct {
+	MarketID 		 string               `json:"marketId,omitempty"`
+	ReplaceOrdersInstructions 	 []ReplaceInstruction  `json:"instructions,omitempty"`
+}
+
 type RunnerFilter struct {
 	MarketID 		 string               `json:"marketId,omitempty"`
 	SelectionID       int64           `json:"selectionId,omitempty"`

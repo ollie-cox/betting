@@ -23,6 +23,15 @@ type PlaceExecutionReport struct {
 }
 
 
+type ReplaceExecutionReport struct {
+	CustomerRef        string                    `json:"customerRef,omitempty"`
+	Status             EExecutionReportStatus    `json:"status,omitempty"`
+	ErrorCode          EExecutionReportErrorCode `json:"errorCode,omitempty"`
+	MarketID           string                    `json:"marketId,omitempty"`
+	InstructionReports []ReplaceInstructionReport  `json:"instructionReports,omitempty"`
+}
+
+
 type CancelInstruction struct {
 	BetID               string                      `json:"betId,omitempty"`
 //	SizeReduction		float64						`json:"sizeReduction"`
@@ -43,6 +52,20 @@ type CancelInstructionReport struct {
 	Instruction        CancelInstruction 			`json:"instruction,omitempty"`
 	SizeCancelled 	   float64 						`json:"sizeCancelled,omitempty"`
 	CancelledDate 	   time.Time                   	`json:"cancelledDate,omitempty"`
+}
+
+
+type ReplaceInstruction struct {
+	BetID               string                      `json:"betId,omitempty"`
+	NewPrice float64                     `json:"newPrice,omitempty"`
+}
+
+
+type ReplaceInstructionReport struct {
+	Status              EInstructionReportStatus    `json:"status,omitempty"`
+	ErrorCode           EInstructionReportErrorCode `json:"errorCode,omitempty"`
+	CancelInstructionReport CancelInstructionReport `json:"cancelInstructionReport,omitempty"`
+	PlaceInstructionReport PlaceInstructionReport `json:"placeInstructionReport,omitempty"`
 }
 
 type PlaceInstructionReport struct {
@@ -85,6 +108,16 @@ func (b *Betting) PlaceOrders(filter Filter) (placeExecutionReport PlaceExecutio
 	return
 }
 
+
+// PlaceOrders to place new orders into market.
+func (b *Betting) ReplaceOrders(filter ReplaceFilter) (replaceExecutionReport ReplaceExecutionReport, err error) {
+	err = b.ReplaceRequest(&replaceExecutionReport, BettingURL, "replaceOrders", &filter)
+	if err != nil {
+		return
+	}
+
+	return
+}
 
 // PlaceOrders to place new orders into market.
 func (b *Betting) CancelOrders(filter CancelFilter) (cancelExecutionReport CancelExecutionReport, err error) {
